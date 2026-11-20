@@ -18,8 +18,8 @@ public class Orcos extends Personajes { //Inicio de mi Clase "Combate" que hered
      * @param armaMagica 
      **/
     public Orcos(String nombre, int vida, float energia, String armaMagica) { //Inicio Super Constructor.
-        super(JOptionPane.showInputDialog(null, "Ingrese el nombre del Orco"), 100, energia);
-        this.armaGuerrera = JOptionPane.showInputDialog(null, "Ingrese el nombre del arma");
+        super(nombre, vida, energia);
+        this.armaGuerrera = armaMagica;
     } //Fin Super Constructor.
     /**
      * Método get de mi variable armaGuerrera.
@@ -39,17 +39,17 @@ public class Orcos extends Personajes { //Inicio de mi Clase "Combate" que hered
      * Método de tipo entero el cual me permite asignarle el "daño" a mis Orcos.
      * @return combate.
      **/
-    public int Ataques() { //Inicio del Método "Ataques".
-        this.combate = (int) (Math.random() * (2 - 50) + 50);
-        JOptionPane.showMessageDialog(null, "Haz Inflingido: " + this.combate + "p de daño", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+    public int Ataques() {
+        if (vida <= 0) return 0;
+        combate = java.util.concurrent.ThreadLocalRandom.current().nextInt(2, 51);
         return combate;
     } //Fin del Método "Ataques".
     /**
      * Método de tipo entero el cual me permite determinar la cantidad que se sanaran mis Orcos.
      * @return vida.
      **/
-    public int Sanacion() { //Inicio del Método "Sanacion".
-        this.vida = vida + alimenta.getCuracionOrco();
+    public int Sanacion() {
+        if (vida > 0) setVida(vida + alimenta.getCuracionOrco());
         return vida;
     } //Fin del Método "Sanacion".
 } //Fin de mi Clase "Orcos".

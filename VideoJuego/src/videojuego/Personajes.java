@@ -14,9 +14,9 @@ public class Personajes { //Inicio de la clase "Personajes".
      * @param energia 
      **/
     public Personajes(String nombre, int vida, float energia) {//Inicio del Constructor.
-        this.nombre = nombre;
-        this.vida = vida;
-        this.energia = energia;
+        this.nombre = nombre == null || nombre.trim().isEmpty() ? "Personaje" : nombre.trim();
+        this.vida = Math.max(0, Math.min(100, vida));
+        this.energia = Float.isNaN(energia) ? 0 : Math.max(0, Math.min(100, energia));
     }//Fin del Constructor.
     //Primero se codifican los set de mis variables y luego los gets. 
     /**
@@ -24,21 +24,21 @@ public class Personajes { //Inicio de la clase "Personajes".
      * @param nombre 
      **/
     public void setNombre(String nombre) { //Inicio del método set.
-        this.nombre = nombre;
+        this.nombre = nombre == null || nombre.trim().isEmpty() ? "Personaje" : nombre.trim();
     } //Fin del método set.
     /**
      * Método set de mi variable vida.
      * @param vida 
      **/
     public void setVida(int vida) { //Inicio del método set.
-        this.vida = vida;
+        this.vida = Math.max(0, Math.min(100, vida));
     } //Fin del método set.
     /**
      * Método set de mi variable energia.
      * @param energia 
      **/
     public void setEnergia(float energia) { //Inicio del método set.
-        this.energia = energia;
+        this.energia = Float.isNaN(energia) ? 0 : Math.max(0, Math.min(100, energia));
     }//Fin del método set.
     /**
      * Método get de mi variable nombre.

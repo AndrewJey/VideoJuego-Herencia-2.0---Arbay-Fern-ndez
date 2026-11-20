@@ -1,0 +1,9 @@
+[
+  {
+    "project": "VideoJuego/build.xml",
+    "source": "checks/CombatCheck.java",
+    "main": "CombatCheck",
+    "headless": true,
+    "classpath": []
+  }
+]

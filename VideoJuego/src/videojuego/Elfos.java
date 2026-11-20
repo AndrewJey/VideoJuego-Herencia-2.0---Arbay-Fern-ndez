@@ -19,8 +19,8 @@ public class Elfos extends Personajes { //Inicio de mi Clase "Elfos" que hereda 
      * @param armaMagica 
      **/
     public Elfos(String nombre, int vida, float energia, String armaMagica) { //Inicio del Super Constructor.
-        super(JOptionPane.showInputDialog(null, "Ingrese el nombre del Elfo"), 100, energia);
-        this.armaMagica = JOptionPane.showInputDialog(null, "Ingrese el nombre del arma");
+        super(nombre, vida, energia);
+        this.armaMagica = armaMagica;
     } //Fin del Super Constructor.
     /**
      * Método get de mi variable armaMagica.
@@ -40,27 +40,21 @@ public class Elfos extends Personajes { //Inicio de mi Clase "Elfos" que hereda 
      * Método de tipo entero el cual me permite asignarle el "daño" a mis Elfos.
      * @return combate.
      **/
-    public int Ataques() { //Inicio del Método "Ataques".
-        String poder = String.valueOf((int) (Math.random() * 11));
-        //Variable de tipo entero llamada aux.
-        int aux = (int) (Math.random() * 2);
-        if (aux > 0 && this.energia > 0) {
-            this.combate = this.combate + Integer.parseInt(poder);
-            this.energia = this.energia / 2;
-            System.out.println(this.nombre + " tu energia actual es de: " + this.energia);
-            System.out.println("Tu bonus de daño fue de: " + poder);
-        } else {
-            this.combate = (int) (Math.random() * 45);
+    public int Ataques() {
+        if (vida <= 0) return 0;
+        combate = java.util.concurrent.ThreadLocalRandom.current().nextInt(1, 45);
+        if (energia > 0) {
+            combate += java.util.concurrent.ThreadLocalRandom.current().nextInt(0, 11);
+            energia /= 2;
         }
-        JOptionPane.showMessageDialog(null, "Haz Inflingido: " + this.combate + "p de daño", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
         return combate;
     } //Fin del Método "Ataques".
     /**
      * Método de tipo entero el cual me permite determinar la cantidad que se sanaran mis Elfos.
      * @return vida.
      **/
-    public int Sanacion() { //Inicio del Método "Sanacion".
-        this.vida = vida + alimenta.getCuracionElfo();
+    public int Sanacion() {
+        if (vida > 0) setVida(vida + alimenta.getCuracionElfo());
         return vida;
     } //Fin del Método "Sanacion".
 } //Fin de mi Clase "Elfos".
